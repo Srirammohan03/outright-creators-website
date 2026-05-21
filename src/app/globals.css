@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+html {
+  scroll-behavior: auto;
 }
 
 @theme inline {
