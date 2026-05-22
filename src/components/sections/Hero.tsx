@@ -23,32 +23,30 @@ const Hero = () => {
 
   return (
     <div className="flex h-screen items-center justify-center overflow-hidden">
-      <div className="flex flex-col text-7xl leading-none font-semibold uppercase">
-        {/* First Word */}
-        <div className="overflow-hidden">
-          <motion.span
-            custom={baseDelay}
-            variants={textVariant}
-            initial="hidden"
-            animate="visible"
-            className="block"
-          >
-            Outright
-          </motion.span>
-        </div>
-
-        {/* Second Word */}
-        <div className="overflow-hidden">
-          <motion.span
-            custom={baseDelay + 0.1}
-            variants={textVariant}
-            initial="hidden"
-            animate="visible"
-            className="block"
-          >
-            Creators
-          </motion.span>
-        </div>
+      <div className="flex flex-col text-7xl leading-none font-semibold text-black uppercase">
+        {["Creative", "Digital", "Agency"].map((word, index) => {
+          const customDelay = baseDelay + index * 0.3; // Stagger the delay for each word
+          return (
+            <motion.div
+              key={index}
+              variants={textVariant}
+              initial="hidden"
+              animate="visible"
+              custom={customDelay}
+              className="overflow-hidden"
+            >
+              <motion.span
+                variants={textVariant}
+                initial="hidden"
+                animate="visible"
+                custom={customDelay + 0.15} // Slightly delay the span animation
+                className="inline-block"
+              >
+                {word}
+              </motion.span>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

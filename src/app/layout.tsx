@@ -4,7 +4,6 @@ import "./globals.css";
 import LenisProvider from "../components/providers/lenis-provider";
 import Header from "../components/layout/Header";
 import IntroProvider from "../components/providers/IntroProvider";
-import PageTransition from "../components/transition/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +34,7 @@ export default function RootLayout({
         <LenisProvider>
           <IntroProvider>
             <Header />
-            <PageTransition>{children}</PageTransition>
+            {children}
           </IntroProvider>
         </LenisProvider>
       </body>

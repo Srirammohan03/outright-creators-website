@@ -59,7 +59,7 @@ const Header = () => {
             {/* LEFT */}
             <button
               onClick={() => setShowSlide(!showSlide)}
-              className="relative z-10001 flex items-center gap-3 text-sm font-medium tracking-wide text-white hover:cursor-pointer"
+              className="relative z-10001 flex items-center gap-3 text-sm font-medium tracking-wide text-black hover:cursor-pointer"
             >
               {/* Animated Icon */}
               <div className="relative flex h-5 w-5 items-center justify-center">
@@ -79,10 +79,7 @@ const Header = () => {
                     duration: 0.4,
                     ease: [0.76, 0, 0.24, 1],
                   }}
-                  className={cn(
-                    "absolute h-[1.5px] w-5 bg-current",
-                    showSlide ? "text-black" : "text-white",
-                  )}
+                  className={cn("absolute h-[1.6px] w-5 bg-current text-black")}
                 />
 
                 <motion.span
@@ -101,19 +98,11 @@ const Header = () => {
                     duration: 0.4,
                     ease: [0.76, 0, 0.24, 1],
                   }}
-                  className={cn(
-                    "absolute h-[1.5px] w-5 bg-current",
-                    showSlide ? "text-black" : "text-white",
-                  )}
+                  className={cn("absolute h-[1.6px] w-5 bg-current text-black")}
                 />
               </div>
 
-              <span
-                className={cn(
-                  "hidden sm:block",
-                  showSlide ? "text-black" : "text-white",
-                )}
-              >
+              <span className={cn("hidden text-black sm:block")}>
                 {showSlide ? "Close" : "Menu"}
               </span>
             </button>
@@ -265,11 +254,11 @@ const Header = () => {
                         <AnimatedLink
                           title={item.title}
                           textClassName={cn(
-                            "text-5xl md:text-[100px] leading-[0.9] font-black tracking-[-0.08em] uppercase transition-colors duration-300",
+                            "text-5xl md:text-[100px] leading-[0.9] font-black tracking-[-0.08em] uppercase transition-colors duration-300 font-seasons",
                             isActiveRoute ? "text-neutral-400" : "text-black",
                           )}
                           hoverTextClassName={cn(
-                            "text-5xl md:text-[100px] leading-[0.9] font-black tracking-[-0.08em] uppercase",
+                            "text-5xl md:text-[100px] leading-[0.9] font-black tracking-[-0.08em] uppercase font-seasons",
                             isActiveRoute ? "text-neutral-400" : "text-black",
                           )}
                         />
