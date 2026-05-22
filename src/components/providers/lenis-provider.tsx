@@ -1,6 +1,6 @@
 "use client";
 
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import { ReactNode, useEffect } from "react";
 
 interface Props {
@@ -26,5 +26,5 @@ export default function LenisProvider({ children }: Props) {
     };
   }, []);
 
-  return <>{children};</>;
+  return <>{children}</>;
 }
