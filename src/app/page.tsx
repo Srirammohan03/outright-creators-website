@@ -12,7 +12,7 @@ export default function Home() {
       <Stats />
       {/* <ServicesSection /> */}
       <PortfolioSection />
-      <ImageSection />
+      {/* <ImageSection /> */}
       <div className="h-60"></div>
     </div>
   );
