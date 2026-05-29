@@ -1,3 +1,5 @@
+// src/app/about/page.tsx
+
 "use client";
 
 import React from "react";
@@ -5,32 +7,32 @@ import { motion } from "framer-motion";
 
 const textVariant = {
   hidden: {
-    y: "100%",
+    y: "100%",  
     opacity: 0,
   },
-  visible: (customDelay: number) => ({
+
+  visible: (delay: number) => ({
     y: "0%",
     opacity: 1,
+
     transition: {
-      duration: 0.8,
+      duration: 0.9,
       ease: [0.76, 0, 0.24, 1],
-      delay: customDelay,
+      delay,
     },
   }),
 };
 
 const About = () => {
-  const baseDelay = 0.75;
   return (
-    <div className="flex h-screen items-center justify-center overflow-hidden">
-      <div className="flex flex-col text-7xl leading-none font-semibold uppercase">
+    <div className="flex h-screen items-center justify-center overflow-hidden bg-white">
+      <div className="flex flex-col text-center text-6xl leading-none font-semibold uppercase sm:text-7xl md:text-8xl">
         <div className="overflow-hidden">
           <motion.span
-            custom={baseDelay}
+            custom={0.3}
             variants={textVariant}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible"
             className="block"
           >
             About
@@ -39,17 +41,11 @@ const About = () => {
 
         <div className="overflow-hidden">
           <motion.span
-            custom={baseDelay}
+            custom={0.45}
             variants={textVariant}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              ease: [0.76, 0, 0.24, 1],
-              delay: 0.1,
-            }}
-            className="block"
+            animate="visible"
+            className="block text-yellow-500"
           >
             Us
           </motion.span>

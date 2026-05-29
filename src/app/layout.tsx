@@ -1,9 +1,17 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
+
 import LenisProvider from "../components/providers/lenis-provider";
-import Header from "../components/layout/Header";
 import IntroProvider from "../components/providers/IntroProvider";
+
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+
+import TransitionProvider from "../components/transitions/TransitionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,8 +41,13 @@ export default function RootLayout({
       <body className="relative flex min-h-full flex-col overflow-x-hidden bg-white text-black dark:bg-black dark:text-white">
         <LenisProvider>
           <IntroProvider>
-            <Header />
-            {children}
+            <TransitionProvider>
+              <Header />
+
+              {children}
+
+              {/* <Footer /> */}
+            </TransitionProvider>
           </IntroProvider>
         </LenisProvider>
       </body>
