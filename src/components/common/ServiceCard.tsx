@@ -2,30 +2,7 @@ import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
 import SplitTextReveal from "../motion/SplitTextReveal";
 import MediaGrid from "./MediaGrid";
-
-type ServiceItem = {
-  id: number;
-  index: string;
-  title: string;
-  tagline: string;
-  tech: string[];
-  features: string[];
-  persons: string[];
-  media: (
-    | {
-        type: string;
-        src: string;
-        thumb: string;
-        label: string;
-      }
-    | {
-        type: string;
-        src: string;
-        label: string;
-        thumb?: undefined;
-      }
-  )[];
-};
+import type { ServiceItem } from "../data/service";
 
 export default function ServiceCard({
   service,
