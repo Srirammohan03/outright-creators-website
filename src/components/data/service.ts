@@ -1,4 +1,23 @@
-export const services = [
+export type MediaItem = {
+  type: "video" | "image";
+  src: string;
+  thumb?: string;
+  label: string;
+};
+
+export type ServiceItem = {
+  id: number;
+  index: string;
+  title: string;
+  tagline: string;
+  tech: string[];
+  features: string[];
+  persons: string[];
+  media: MediaItem[];
+  scrubVideo: string;
+};
+
+export const services: ServiceItem[] = [
   {
     id: 1,
     index: "01",
