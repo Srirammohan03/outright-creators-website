@@ -12,7 +12,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { useState } from "react";
-
+import { usePageTransition } from "../transitions/TransitionProvider";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -25,7 +25,7 @@ export default function Header() {
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { navigate } = usePageTransition();
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 30);
   });
@@ -72,23 +72,21 @@ export default function Header() {
           {/* DESKTOP NAV */}
           <nav className="hidden items-center gap-10 lg:flex">
             {navItems.map((item, idx) => (
-              <Link
+              <button
                 key={idx}
-                href={item.href}
+                onClick={() => navigate(item.href)}
                 className="group relative block overflow-hidden text-[16px] font-semibold text-black xl:text-[18px]"
               >
                 <div className="relative h-[24px] overflow-hidden">
-                  {/* MAIN TEXT */}
                   <span className="block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
                     {item.label}
                   </span>
 
-                  {/* HOVER TEXT */}
                   <span className="absolute top-0 left-0 block translate-y-full text-black/60 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
                     {item.label}
                   </span>
                 </div>
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -139,15 +137,17 @@ export default function Header() {
                     delay: i * 0.05,
                   }}
                 >
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      navigate(item.href);
+                    }}
                     className="flex items-center justify-between border-b border-black/5 py-5 text-[24px] font-semibold text-black"
                   >
                     {item.label}
 
                     <ArrowUpRight size={18} className="text-black/40" />
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
 
