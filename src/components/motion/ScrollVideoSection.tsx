@@ -1,57 +1,127 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   video: string;
   title: string;
 };
 
-export default function ScrollVideoSection({ video, title }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+export default function ScrollVideoSection({
+  video,
+  title,
+}: Props) {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    if (!video) return;
-
-    const updateVideo = () => {
-      const duration = video.duration;
-
-      if (!duration) return;
-
-      const unsubscribe = scrollYProgress.on("change", (progress) => {
-        video.currentTime = duration * progress;
-      });
-
-      return unsubscribe;
-    };
-
-    video.addEventListener("loadedmetadata", updateVideo);
-
-    return () => {
-      video.removeEventListener("loadedmetadata", updateVideo);
-    };
-  }, [scrollYProgress]);
-
-  const overlayOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [1, 0, 0, 1],
+  const videoRef = useRef<HTMLVideoElement | null>(
+    null,
   );
 
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-150%"]);
+  const overlayRef = useRef<HTMLDivElement | null>(
+    null,
+  );
+
+  const titleRef = useRef<HTMLHeadingElement | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    const video = videoRef.current;
+
+    const overlay = overlayRef.current;
+
+    const title = titleRef.current;
+
+    if (
+      !section ||
+      !video ||
+      !overlay ||
+      !title
+    )
+      return;
+
+    const ctx = gsap.context(() => {
+      const onLoaded = () => {
+        // VIDEO SCRUB
+        gsap.to(video, {
+          currentTime: video.duration,
+
+          ease: "none",
+
+          scrollTrigger: {
+            trigger: section,
+
+            start: "top top",
+
+            end: "bottom bottom",
+
+            scrub: 1,
+          },
+        });
+
+        // OVERLAY FADE
+        gsap.to(overlay, {
+          opacity: 0,
+
+          ease: "none",
+
+          scrollTrigger: {
+            trigger: section,
+
+            start: "top top",
+
+            end: "30% top",
+
+            scrub: true,
+          },
+        });
+
+        // TITLE MOVE
+        gsap.to(title, {
+          yPercent: -150,
+
+          ease: "none",
+
+          scrollTrigger: {
+            trigger: section,
+
+            start: "top top",
+
+            end: "bottom bottom",
+
+            scrub: true,
+          },
+        });
+      };
+
+      // IMPORTANT
+      // wait for metadata before scrub
+
+      if (video.readyState >= 1) {
+        onLoaded();
+      } else {
+        video.addEventListener(
+          "loadedmetadata",
+          onLoaded,
+        );
+      }
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[500vh]">
-      {/* STICKY FULLSCREEN VIDEO */}
+    <section
+      ref={sectionRef}
+      className="relative h-[400vh]"
+    >
+      {/* STICKY VIDEO */}
       <div className="sticky top-0 h-screen overflow-hidden bg-black">
         <video
           ref={videoRef}
@@ -63,17 +133,15 @@ export default function ScrollVideoSection({ video, title }: Props) {
         />
 
         {/* DARK OVERLAY */}
-        <motion.div
-          style={{ opacity: overlayOpacity }}
+        <div
+          ref={overlayRef}
           className="absolute inset-0 bg-black/40"
         />
 
         {/* TITLE */}
-        <motion.div
-          style={{ y: textY }}
-          className="absolute inset-0 flex items-center justify-center"
-        >
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <h2
+            ref={titleRef}
             className="text-center font-black tracking-[-0.05em] text-white uppercase"
             style={{
               fontSize: "clamp(4rem, 10vw, 10rem)",
@@ -82,7 +150,7 @@ export default function ScrollVideoSection({ video, title }: Props) {
           >
             {title}
           </h2>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

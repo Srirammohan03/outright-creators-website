@@ -13,7 +13,12 @@ import {
 } from "framer-motion";
 import { useState } from "react";
 
-const navItems = ["Home", "About", "Services", "Collections"];
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Collections", href: "/collections" },
+];
 
 export default function Header() {
   const { scrollY } = useScroll();
@@ -66,21 +71,21 @@ export default function Header() {
 
           {/* DESKTOP NAV */}
           <nav className="hidden items-center gap-10 lg:flex">
-            {navItems.map((item) => (
+            {navItems.map((item, idx) => (
               <Link
-                key={item}
-                href="/"
+                key={idx}
+                href={item.href}
                 className="group relative block overflow-hidden text-[16px] font-semibold text-black xl:text-[18px]"
               >
                 <div className="relative h-[24px] overflow-hidden">
                   {/* MAIN TEXT */}
                   <span className="block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
-                    {item}
+                    {item.label}
                   </span>
 
                   {/* HOVER TEXT */}
                   <span className="absolute top-0 left-0 block translate-y-full text-black/60 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                    {item}
+                    {item.label}
                   </span>
                 </div>
               </Link>
@@ -127,7 +132,7 @@ export default function Header() {
             <div className="flex flex-col px-5 py-6">
               {navItems.map((item, i) => (
                 <motion.div
-                  key={item}
+                  key={i}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -135,11 +140,11 @@ export default function Header() {
                   }}
                 >
                   <Link
-                    href="/"
+                    href={item.href}
                     onClick={() => setMenuOpen(false)}
                     className="flex items-center justify-between border-b border-black/5 py-5 text-[24px] font-semibold text-black"
                   >
-                    {item}
+                    {item.label}
 
                     <ArrowUpRight size={18} className="text-black/40" />
                   </Link>
