@@ -1,208 +1,257 @@
-export type MediaItem = {
-  type: "video" | "image";
-  src: string;
-  thumb?: string;
-  label: string;
-};
+type AssetType = "video" | "image" | "pdf" | "logo";
 
-export type ServiceItem = {
-  id: number;
-  index: string;
+export type ShowcaseItem = {
+  id: string;
   title: string;
-  tagline: string;
-  tech: string[];
-  features: string[];
-  persons: string[];
-  media: MediaItem[];
-  scrubVideo: string;
+  type: AssetType;
+  thumbnail: string;
+  caption: string;
+  description: string;
+  youtubeId?: string;
+  fileLabel?: string;
 };
 
-export const services: ServiceItem[] = [
+export type ServiceSection = {
+  index: number;
+  id: string;
+  title: string;
+  label: string;
+  labelImage?: string;
+  description: string;
+  tech: { name: string; icon: string }[];
+  features: string[];
+  clients: string[];
+  assets: ShowcaseItem[];
+};
+
+export const services: ServiceSection[] = [
   {
-    id: 1,
-    index: "01",
-    title: "Motion Graphics",
-    tagline: "Frame by frame, story by story",
-    tech: ["After Effects", "Cinema 4D", "Lottie", "GSAP"],
-    features: ["3D Animation", "VFX Integration", "Sound Design", "Brand Kits"],
-    persons: ["Aryan K.", "Meera S."],
-    media: [
-      {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80",
-        label: "Brand Reel 2024",
-      },
-      {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80",
-        label: "3D Loop Series",
-      },
-      {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80",
-        label: "Kinetic Type",
-      },
-      {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80",
-        label: "Product Launch",
-      },
+    index: 0,
+    id: "graphic-design",
+    label: "Graphic Design",
+    labelImage: "/assets/graphic-design.png",
+    title: "Premium identity systems built for luxury brands",
+    description:
+      "From packaging to campaign visuals, every asset is designed to feel refined, elevated, and unmistakably yours.",
+    tech: [
+      { name: "Adobe Photoshop", icon: "/assets/Photoshop.jpg" },
+      { name: "Adobe Premiere Pro", icon: "/assets/pr.jpg" },
+      { name: "Adobe After Effects", icon: "/assets/AfterEffect.jpg" },
+      { name: "Adobe Illustrator", icon: "/assets/RedirectNotice.jpg" },
+      { name: "Canva", icon: "/assets/canva.webp" },
     ],
-    scrubVideo: "https://www.w3schools.com/html/mov_bbb.mp4",
-  },
-  {
-    id: 2,
-    index: "02",
-    title: "AI Content",
-    tagline: "Intelligence meets imagination",
-    tech: ["Midjourney", "Runway ML", "Sora", "Stable Diffusion"],
     features: [
-      "AI Voiceovers",
-      "Generative Visuals",
-      "Auto-Editing",
-      "Style Transfer",
+      "Logo systems",
+      "Packaging design",
+      "Brand guidelines",
+      "Print collateral",
     ],
-    persons: ["Dev P.", "Lena M."],
-    media: [
+    clients: ["Luma House", "Nova Collective", "Cerulean Labs", "Aura Studios"],
+    assets: [
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1686191128892-3b37add4c844?w=600&q=80",
-        label: "AI Portraits",
-      },
-      {
+        id: "graphic-video-1",
+        title: "Brand debut reel",
         type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1684864880782-1b31bfef77c4?w=600&q=80",
-        label: "Generated Worlds",
+        thumbnail: "/header-image-1.webp",
+        caption: "Video case study",
+        description: "A cinematic reveal for a high-end brand launch.",
+        youtubeId: "dQw4w9WgXcQ",
       },
       {
+        id: "graphic-image-1",
+        title: "Edition cover",
         type: "image",
-        src: "https://images.unsplash.com/photo-1675557009483-d4a5cf0a7944?w=600&q=80",
-        label: "Style Fusion",
+        thumbnail: "/header-image-2.webp",
+        caption: "Premium editorial layout",
+        description: "Visual treatment for a limited release campaign.",
       },
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1686191128514-82ee95d7c3c6?w=600&q=80",
-        label: "Concept Art",
+        id: "graphic-pdf-1",
+        title: "Print brochure",
+        type: "pdf",
+        thumbnail: "/header-image-3.webp",
+        caption: "Brochure concept",
+        description: "A tactile print system for launch events.",
+        fileLabel: "Brochure PDF",
+      },
+      {
+        id: "graphic-logo-1",
+        title: "Logo network",
+        type: "logo",
+        thumbnail: "/header-image-4.webp",
+        caption: "Brand mark suite",
+        description: "Flexible logo lockups for digital and print.",
       },
     ],
-    scrubVideo: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
   {
-    id: 3,
-    index: "03",
-    title: "Branding",
-    tagline: "Identity that commands attention",
-    tech: ["Figma", "Illustrator", "Framer", "Webflow"],
-    features: ["Logo Systems", "Brand Guidelines", "Packaging", "Typography"],
-    persons: ["Rohit A.", "Sara T."],
-    media: [
-      {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
-        label: "Brand Identity",
-      },
-      {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80",
-        label: "Packaging Design",
-      },
-      {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&q=80",
-        label: "Motion Brand",
-      },
-      {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=600&q=80",
-        label: "Print Suite",
-      },
+    index: 1,
+    id: "motion-design",
+    label: "Motion Design",
+    labelImage: "/assets/MotionDesign.jpg",
+    title: "High-end animation for new product launches",
+    description:
+      "Motion that feels polished but powerful — built to keep pace with premium storytelling and product momentum.",
+    tech: [
+      { name: "Adobe After Effects", icon: "/assets/AfterEffect.jpg" },
+      { name: "Adobe Premiere Pro", icon: "/assets/pr.jpg" },
+      { name: "Animate cc", icon: "/assets/Animate.jpg" },
+      { name: "Canva", icon: "/assets/canva.webp" },
     ],
-    scrubVideo: "https://www.w3schools.com/html/mov_bbb.mp4",
-  },
-  {
-    id: 4,
-    index: "04",
-    title: "Social Media",
-    tagline: "Scroll-stopping content at scale",
-    tech: ["Premiere Pro", "CapCut", "Canva Pro", "Buffer"],
     features: [
-      "Reels & Shorts",
-      "Story Templates",
-      "Content Calendar",
-      "Analytics",
+      "Launch reels",
+      "UI motion",
+      "Explainer films",
+      "Animated transitions",
     ],
-    persons: ["Priya N.", "James O."],
-    media: [
+    clients: ["Pulse Media", "Frost Labs", "Rise Digital", "Eclipse Studio"],
+    assets: [
       {
+        id: "motion-video-1",
+        title: "Launch animation",
         type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80",
-        label: "Instagram Reels",
+        thumbnail: "/header-image-3.webp",
+        caption: "Dynamic product film",
+        description: "A launch sequence with premium motion detail.",
+        youtubeId: "dQw4w9WgXcQ",
       },
       {
+        id: "motion-image-1",
+        title: "Motion storyboard",
         type: "image",
-        src: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&q=80",
-        label: "Story Pack",
+        thumbnail: "/header-image-1.webp",
+        caption: "Animation concept frames",
+        description: "Storyboard visuals for a campaign narrative.",
       },
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80",
-        label: "Feed Layout",
+        id: "motion-pdf-1",
+        title: "Presentation deck",
+        type: "pdf",
+        thumbnail: "/header-image-2.webp",
+        caption: "Campaign overview",
+        description: "Strategy and motion direction in a branded deck.",
+        fileLabel: "Deck PDF",
       },
       {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumb:
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80",
-        label: "TikTok Series",
+        id: "motion-logo-1",
+        title: "Motion identity",
+        type: "logo",
+        thumbnail: "/header-image-4.webp",
+        caption: "Animated mark set",
+        description: "A motion-ready identity system for screen.",
       },
     ],
-    scrubVideo: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
   {
-    id: 5,
-    index: "05",
-    title: "YouTube Thumbnails",
-    tagline: "One frame. A million clicks.",
-    tech: ["Photoshop", "Lightroom", "Topaz AI", "DaVinci"],
+    index: 2,
+    id: "social-media",
+    label: "Social Media",
+    labelImage: "/assets/Sociaal.jpg",
+    title: "Scroll-stopping content for modern feeds",
+    description:
+      "We create premium posts, ads, and video content that performs beautifully on every platform.",
+    tech: [
+      { name: "Instagram", icon: "/assets/insta.jpg" },
+      { name: "FaceBook", icon: "/assets/FaceBook.jpg" },
+      { name: "Google Ads", icon: "/assets/Google-ads.jpg" },
+      { name: "YouTube", icon: "/assets/youtube.jpg" },
+    ],
     features: [
-      "A/B Variants",
-      "CTR Optimization",
-      "Custom Typography",
-      "Batch Delivery",
+      "Feed sets",
+      "Reels templates",
+      "Ad design",
+      "Campaign storytelling",
     ],
-    persons: ["Vikram S.", "Nia C."],
-    media: [
+    clients: ["Glow Agency", "Vivid Co.", "Canvas Creative", "Aurora Brands"],
+    assets: [
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=600&q=80",
-        label: "Tech Channel",
+        id: "social-video-1",
+        title: "Reel spotlight",
+        type: "video",
+        thumbnail: "/header-image-2.webp",
+        caption: "Platform-ready reel",
+        description: "A polished vertical video designed for engagement.",
+        youtubeId: "dQw4w9WgXcQ",
       },
       {
+        id: "social-image-1",
+        title: "Carousel concept",
         type: "image",
-        src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80",
-        label: "Finance Niche",
+        thumbnail: "/header-image-4.webp",
+        caption: "Social carousel",
+        description: "Story-led content for a product launch.",
       },
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80",
-        label: "Lifestyle Series",
+        id: "social-pdf-1",
+        title: "Campaign blueprint",
+        type: "pdf",
+        thumbnail: "/header-image-1.webp",
+        caption: "Media strategy PDF",
+        description: "A brand-first social plan for maximum reach.",
+        fileLabel: "Campaign PDF",
       },
       {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1565301660306-29e08751cc53?w=600&q=80",
-        label: "Gaming Pack",
+        id: "social-logo-1",
+        title: "Brand badge",
+        type: "logo",
+        thumbnail: "/header-image-3.webp",
+        caption: "Platform-ready marks",
+        description: "Social-first brand assets for every format.",
       },
     ],
-    scrubVideo: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    index: 3,
+    id: "branding",
+    label: "Branding",
+    labelImage: "/assets/Branding.jpg",
+    title: "Logo design, brochures, printing and brand systems",
+    description:
+      "Every brand moment is built so it looks exceptional across print, packaging, digital, and physical experiences.",
+    tech: [
+      { name: "Adobe Photoshop", icon: "/assets/Photoshop.jpg" },
+      { name: "Adobe Illustrator", icon: "/assets/RedirectNotice.jpg" },
+      { name: "Canva", icon: "/assets/canva.webp" },
+      { name: "Figma", icon: "/assets/figma.jpg" },
+      { name: "CorelDRAW", icon: "/assets/coreldraw.jpg" },
+    ],
+    features: ["Logo design", "Brochures", "Printing", "Collateral systems"],
+    clients: ["Atlas Works", "Mint House", "Studio Nine", "Pulse Brands"],
+    assets: [
+      {
+        id: "brand-video-1",
+        title: "Launch signature",
+        type: "video",
+        thumbnail: "/header-image-4.webp",
+        caption: "Identity reveal",
+        description: "A brand film introducing a new visual universe.",
+        youtubeId: "dQw4w9WgXcQ",
+      },
+      {
+        id: "brand-image-1",
+        title: "Brochure spread",
+        type: "image",
+        thumbnail: "/header-image-1.webp",
+        caption: "Premium printed spread",
+        description: "A brochure layout made for luxury brands.",
+      },
+      {
+        id: "brand-pdf-1",
+        title: "Print guide",
+        type: "pdf",
+        thumbnail: "/header-image-2.webp",
+        caption: "Brand standards",
+        description: "A printing-ready PDF with every asset included.",
+        fileLabel: "Guide PDF",
+      },
+      {
+        id: "brand-logo-1",
+        title: "Mark system",
+        type: "logo",
+        thumbnail: "/header-image-3.webp",
+        caption: "Logo family",
+        description: "A complete symbol set for brand consistency.",
+      },
+    ],
   },
 ];

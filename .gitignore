@@ -44,4 +44,4 @@ next-env.d.ts
 .vscode/*
 !.vscode/settings.json
 .vscode/settings.json
-public/videos/*
+# public/videos/*

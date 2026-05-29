@@ -6,6 +6,7 @@ import ScrollVideoSection from "../motion/ScrollVideoSection";
 import { services } from "../data/service";
 import ServiceCard from "../common/ServiceCard";
 import TextReveal from "../motion/TextReveal";
+import PremiumServiceSections from "./ServicesSections";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -182,6 +183,7 @@ const SocialMedia = () => {
             <SlideIn delay={0}>
               <div className="mb-6 flex items-center gap-3">
                 <div className="h-px w-8 bg-black/20" />
+                <img src="/assets/bulb.svg" alt="Bulb" className="h-6 w-6" />
                 <span className="text-[10px] font-semibold tracking-[0.35em] text-black/50 uppercase">
                   Social Media Management
                 </span>
@@ -348,6 +350,11 @@ const SocialMedia = () => {
           </div>
         </div>
       </div>
+      <PremiumServiceSections
+        key={services[2].id}
+        section={services[2]}
+        index={services[2].index}
+      />
     </section>
   );
 };

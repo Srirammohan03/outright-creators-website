@@ -3,9 +3,11 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import ScrollVideoSection from "../motion/ScrollVideoSection";
-import { services } from "../data/service";
 import ServiceCard from "../common/ServiceCard";
 import TextReveal from "../motion/TextReveal";
+import ScrollImageSequence from "../motion/ScrollImageSequence";
+import PremiumServiceSections from "./ServicesSections";
+import { services } from "../data/service";
 
 const portfolioMedia = [
   {
@@ -36,7 +38,7 @@ const portfolioMedia = [
 
 export default function MotionGraphic() {
   return (
-    <section className="relative py-32" style={{ background: "#f5f3ef" }}>
+    <section className="relative py-10" style={{ background: "#f5f3ef" }}>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
@@ -48,7 +50,7 @@ export default function MotionGraphic() {
       <div className="flex flex-col gap-5">
         <div key={services[0].id}>
           <div className="relative z-10 container">
-            <div className="my-20 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="my-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
               <div>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -61,7 +63,7 @@ export default function MotionGraphic() {
                   className="mb-6 flex items-center gap-4"
                 >
                   <div className="h-px w-10 bg-black/20" />
-
+                  <img src="/assets/bulb.svg" alt="Bulb" className="h-6 w-6" />
                   <span className="text-[10px] font-semibold tracking-[0.3em] text-black/40 uppercase">
                     Motion Graphics
                   </span>
@@ -120,10 +122,9 @@ export default function MotionGraphic() {
               </motion.div>
             </div>
 
-            <ServiceCard
-              key={services[0].id}
-              service={services[0]}
-              index={services[0].id}
+            <PremiumServiceSections
+              index={services[0].index}
+              section={services[0]}
             />
 
             <div className="mt-40 mb-10">
@@ -147,63 +148,82 @@ export default function MotionGraphic() {
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {portfolioMedia.map((item, i) => (
-                  <div
-                    key={item.id}
-                    className="group relative aspect-[4/3] w-full overflow-hidden bg-black/5 md:aspect-square lg:aspect-[4/3]"
-                  >
-                    {item.type === "image" ? (
-                      <motion.img
-                        initial={{ scale: 1.5 }}
-                        whileInView={{ scale: 1 }}
+                  <div key={item.id} className="space-y-4">
+                    {/* IMAGE / VIDEO */}
+                    <div className="group relative aspect-4/3 w-full overflow-hidden bg-black/5 md:aspect-square lg:aspect-4/4">
+                      {item.type === "image" ? (
+                        <motion.img
+                          initial={{ scale: 1.5 }}
+                          whileInView={{ scale: 1 }}
+                          transition={{
+                            duration: 1.2,
+                            ease: [0.76, 0, 0.24, 1],
+                            delay: i * 0.15,
+                          }}
+                          viewport={{ once: true, margin: "-100px" }}
+                          src={item.src}
+                          alt={item.title}
+                          className="h-full w-full scale-105 object-cover transition-transform duration-700 ease-out group-hover:scale-100"
+                        />
+                      ) : (
+                        <motion.video
+                          src={item.src}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          initial={{ scale: 1.5 }}
+                          whileInView={{ scale: 1 }}
+                          transition={{
+                            duration: 1.2,
+                            ease: [0.76, 0, 0.24, 1],
+                            delay: i * 0.15,
+                          }}
+                          viewport={{ once: true, margin: "-100px" }}
+                          className="h-full w-full scale-105 object-cover transition-transform duration-700 ease-out group-hover:scale-100"
+                        />
+                      )}
+
+                      {/* REVEAL LAYER */}
+                      <motion.div
+                        initial={{ y: "0%" }}
+                        whileInView={{ y: "-101%" }}
                         transition={{
                           duration: 1.2,
                           ease: [0.76, 0, 0.24, 1],
                           delay: i * 0.15,
                         }}
                         viewport={{ once: true, margin: "-100px" }}
-                        src={item.src}
-                        alt={item.title}
-                        className="h-full w-full scale-105 object-cover transition-transform duration-700 ease-out group-hover:scale-100"
+                        className="absolute inset-0 z-10 bg-[#0a0a0a]"
                       />
-                    ) : (
-                      <motion.video
-                        src={item.src}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        initial={{ scale: 1.5 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{
-                          duration: 1.2,
-                          ease: [0.76, 0, 0.24, 1],
-                          delay: i * 0.15,
-                        }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="h-full w-full scale-105 object-cover transition-transform duration-700 ease-out group-hover:scale-100"
-                      />
-                    )}
-
-                    <motion.div
-                      initial={{ y: "0%" }}
-                      whileInView={{ y: "-101%" }}
-                      transition={{
-                        duration: 1.2,
-                        ease: [0.76, 0, 0.24, 1],
-                        delay: i * 0.15,
-                      }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="absolute inset-0 z-10 bg-[#0a0a0a]"
-                    />
-
-                    <div className="pointer-events-none flex flex-col justify-end bg-black/40 p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                      <span className="translate-y-4 text-xl font-bold tracking-tight text-white transition-transform duration-500 ease-out group-hover:translate-y-0">
-                        {item.title}
-                      </span>
-                      <span className="mt-2 translate-y-4 text-xs font-medium tracking-wider text-white/70 uppercase transition-transform delay-75 duration-500 ease-out group-hover:translate-y-0">
-                        {item.type === "image" ? "AI Design" : "Motion Graphic"}
-                      </span>
                     </div>
+
+                    {/* CONTENT */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        ease: [0.76, 0, 0.24, 1],
+                        delay: i * 0.15 + 0.25,
+                      }}
+                      viewport={{ once: true }}
+                      className="flex items-end justify-between gap-4"
+                    >
+                      <div>
+                        <h3 className="text-[22px] font-semibold tracking-[-0.03em] text-black">
+                          {item.title}
+                        </h3>
+
+                        <p className="mt-1 text-[12px] font-medium tracking-[0.18em] text-black/50 uppercase">
+                          {item.type === "image"
+                            ? "AI Design"
+                            : "Motion Graphic"}
+                        </p>
+                      </div>
+
+                      <span className="text-sm text-black/30">0{i + 1}</span>
+                    </motion.div>
                   </div>
                 ))}
               </div>

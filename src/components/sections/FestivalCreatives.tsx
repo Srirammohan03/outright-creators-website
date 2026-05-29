@@ -6,6 +6,7 @@ import ScrollVideoSection from "../motion/ScrollVideoSection";
 import { services } from "../data/service";
 import ServiceCard from "../common/ServiceCard";
 import Image from "next/image";
+import PremiumServiceSections from "./ServicesSections";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -899,10 +900,10 @@ const FestivalCreatives = () => {
               </div>
             </ScaleReveal>
 
-            <ServiceCard
-              key={services[2].id}
-              service={services[2]}
-              index={services[2].id}
+            <PremiumServiceSections
+              key={services[1].id}
+              section={services[1]}
+              index={services[1].index}
             />
           </div>
         </div>

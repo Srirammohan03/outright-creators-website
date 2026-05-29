@@ -6,6 +6,7 @@ import ScrollVideoSection from "../motion/ScrollVideoSection";
 import { services } from "../data/service";
 import ServiceCard from "../common/ServiceCard";
 import TextReveal from "../motion/TextReveal";
+import PremiumServiceSections from "./ServicesSections";
 
 const stats = [
   { value: "120+", label: "Brand Identities" },
@@ -85,7 +86,7 @@ const Branding = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32"
+      className="relative py-10"
       style={{ background: "#f5f3ef" }}
     >
       <div
@@ -115,6 +116,7 @@ const Branding = () => {
                   className="mb-6 flex items-center gap-4"
                 >
                   <div className="h-px w-10 bg-black/20" />
+                  <img src="/assets/bulb.svg" alt="Bulb" className="h-6 w-6" />
                   <span className="text-[10px] font-semibold tracking-[0.3em] text-black/40 uppercase">
                     Branding
                   </span>
@@ -204,6 +206,7 @@ const Branding = () => {
               <FadeUp delay={0} className="flex flex-col justify-center">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="h-px w-6 bg-black/20" />
+                  <img src="/assets/bulb.svg" alt="Bulb" className="h-6 w-6" />
                   <span className="text-[10px] font-semibold tracking-[0.3em] text-black/35 uppercase">
                     What We Do
                   </span>
@@ -290,6 +293,7 @@ const Branding = () => {
             <FadeUp delay={0}>
               <div className="mb-10 flex items-center gap-4">
                 <div className="h-px w-8 bg-black/20" />
+                <img src="/assets/bulb.svg" alt="Bulb" className="h-6 w-6" />
                 <span className="text-[10px] font-semibold tracking-[0.3em] text-black/35 uppercase">
                   Our Process
                 </span>
@@ -417,10 +421,10 @@ const Branding = () => {
             </div>
 
             {/* ── SERVICE CARD ── */}
-            <ServiceCard
-              key={services[2].id}
-              service={services[2]}
-              index={services[2].id}
+            <PremiumServiceSections
+              key={services[3].id}
+              section={services[3]}
+              index={services[3].index}
             />
           </div>
         </div>

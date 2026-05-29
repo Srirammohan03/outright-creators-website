@@ -5,16 +5,18 @@ import Branding from "../components/sections/Branding";
 import SocialMedia from "../components/sections/SocialMedia";
 import FestivalCreatives from "../components/sections/FestivalCreatives";
 import PremiumServiceSections from "../components/sections/ServicesSections";
+import ScrollImageSequence from "../components/motion/ScrollImageSequence";
 
 export default function Home() {
   return (
     <div className="bg-zinc-50 font-sans">
+      <ScrollImageSequence folder="/videos/frames" totalFrames={236} />
       <MotionGraphic />
+      <ScrollImageSequence folder="/videos/frames" totalFrames={236} />
       <Branding />
       <SocialMedia />
       <FestivalCreatives />
       <Stats />
-      <PremiumServiceSections />
       {/* <ServicesSection /> */}
       {/* <PortfolioSection /> */}
       {/* <ImageSection /> */}
