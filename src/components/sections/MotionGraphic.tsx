@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import ScrollVideoSection from "../motion/ScrollVideoSection";
-import ServiceCard from "../common/ServiceCard";
 import TextReveal from "../motion/TextReveal";
 import ScrollImageSequence from "../motion/ScrollImageSequence";
 import PremiumServiceSections from "./ServicesSections";

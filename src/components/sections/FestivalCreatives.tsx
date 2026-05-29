@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ScrollVideoSection from "../motion/ScrollVideoSection";
 import { services } from "../data/service";
-import ServiceCard from "../common/ServiceCard";
 import Image from "next/image";
 import PremiumServiceSections from "./ServicesSections";
 
